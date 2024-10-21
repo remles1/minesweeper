@@ -1,10 +1,10 @@
 
 
-function createBoard(){
+function createHtmlBoard(rows,cols){
     const board = document.querySelector(".board");
 
-    for(let i = 0; i < 16; i++){
-        for(let j = 0; j < 16; j++){
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < cols; j++){
             const cell = document.createElement("div");
             cell.classList.add("cell");
             cell.classList.add("cell-closed");
@@ -14,6 +14,51 @@ function createBoard(){
             board.appendChild(cell);
         }
     }
+}
+
+function createLogicBoard(rows,cols,mineCount){
+    const logicBoard = [];
+
+    for(let i = 0; i < rows; i++){
+        const row = [];
+        for(let j = 0; j < cols; j++){
+            row.push(0);
+        }
+        logicBoard.push(row);
+    }
+
+    populateLogicBoardWithMines(logicBoard,mineCount)
+
+
+
+
+
+
+    return logicBoard;
+}
+
+
+
+function populateLogicBoardWithMines(logicBoard,mineCount){
+    let minesToPlace = mineCount;
+    let rows = logicBoard.length;
+    let cols = logicBoard[0].length;
+
+    while(minesToPlace > 0){
+        i = Math.floor(Math.random() * rows);
+        j = Math.floor(Math.random() * cols);
+
+        if(logicBoard[i][j] === 0){
+            logicBoard[i][j] = -1;
+            minesToPlace--;
+        }
+    }
+}
+
+function calculateCellValues(logicBoard){
+    let rows = logicBoard.length;
+    let cols = logicBoard[0].length;
+
     
 }
 
@@ -29,4 +74,10 @@ function cellRightClicked(){
     this.classList.toggle("cell-flagged");
 }
 
-createBoard()
+
+rows = 16;
+cols = 16;
+mineCount = 40;
+
+createHtmlBoard(rows,cols);
+const logicBoard = createLogicBoard(rows,cols,mineCount);
