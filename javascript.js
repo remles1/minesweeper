@@ -55,7 +55,7 @@ function populateLogicBoardWithMines(logicBoard,mineCount){
     }
 }
 
-function calculateCellValues(logicBoard){
+function calculateCellValues(logicBoard){ //TODO ma obliczac ile jest bomb w sasiedztwie
     let rows = logicBoard.length;
     let cols = logicBoard[0].length;
 

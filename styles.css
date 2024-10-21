@@ -25,18 +25,19 @@ body{
 .cell{
     height: 25px;
     width: 25px;
+    background-size: cover;
 }
 
 .cell-closed{
-    background-image: url("cell-closed.png");
+    background-image: url("cell-closed.svg");
 }
 
 .cell-flagged{
-    background-image: url("cell-flagged.png");
+    background-image: url("cell-flagged.svg");
 }
 
 .cell-opened{
-    background-image: url("cell-open.png");
+    background-image: url("cell-opened.svg");
 }
 
 
