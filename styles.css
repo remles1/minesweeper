@@ -1,0 +1,50 @@
+body{
+    margin: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.main{
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.board{
+    display: flex;
+    max-width: 400;
+    max-height: 400;
+    height: 400px;
+    width: 400px;
+    flex-wrap: wrap;
+}
+
+.cell{
+    height: 25px;
+    width: 25px;
+}
+
+.cell-closed{
+    background-image: url("cell-closed.png");
+}
+
+.cell-flagged{
+    background-image: url("cell-flagged.png");
+}
+
+.cell-opened{
+    background-image: url("cell-open.png");
+}
+
+
+
+.footer{
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: black;
+}
