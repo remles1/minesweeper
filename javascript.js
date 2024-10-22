@@ -96,8 +96,7 @@ function cellLeftClicked(){
         const cellj = Number(split[1]);
         const cellValue = logicBoard[celli][cellj];
         if(cellValue === -1){
-            this.classList.add("cell-mine-exploded");
-            onLose();
+            onLose(this);
         }
         else{
             this.classList.add("cell-" + cellValue);
@@ -113,8 +112,19 @@ function cellLeftClicked(){
     }
 }
 
-function onLose(){
-    //dodac otwieranie planszy
+function onLose(clickedCell){    
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < cols; j++){
+            if(logicBoard[i][j] === -1){
+                const cell = document.querySelector("#id" + i + "-" + j);
+                cell.classList.add('cell-mine')
+            }
+        }
+    }
+
+    clickedCell.classList.remove('cell-mine');
+    clickedCell.classList.add('cell-mine-exploded');
+
     cells = Array.from(board.children);
     cells.forEach(cell => {
         cell.removeEventListener("click",cellLeftClicked);
