@@ -141,10 +141,13 @@ function openFreeCells(celli,cellj){
     const cell = document.querySelector("#" + id);
     const cellValue = logicBoard[celli][cellj]
     if(!(cellValue === 0)){
-        cell.classList.remove("cell-closed");
-        cell.classList.add("cell-opened");
-        cell.classList.add("cell-" + cellValue);
-        cellsOpened++;
+        if(!(cell.classList.contains("cell-opened"))){
+            cell.classList.remove("cell-closed");
+            cell.classList.add("cell-opened");
+            cell.classList.add("cell-" + cellValue);
+            cellsOpened++;
+        }
+        
     }
     else{
         //rows i cols maja byc zmiennymi globalnymi w tym momencie, niemozliwe inaczej
@@ -159,10 +162,11 @@ function openFreeCells(celli,cellj){
                 if(currentCol < 0 || currentCol >= cols) continue;
                 if(di == 0 && dj == 0) continue;
                 
-                
-                cell.classList.remove("cell-closed");
-                cell.classList.add("cell-opened");
-                cellsOpened++;
+                if(!(cell.classList.contains("cell-opened"))){
+                    cell.classList.remove("cell-closed");
+                    cell.classList.add("cell-opened");
+                    cellsOpened++;
+                }
                 openFreeCells(currentRow,currentCol);
             }
         }
