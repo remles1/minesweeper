@@ -111,29 +111,25 @@ function cellLeftClicked(){
 }
 
 function checkWin(){
-    let noClosedCellsLeft = !(Array.from(board.children).some(cell => cell.classList.contains("cell-closed")));
-    if(noClosedCellsLeft && mineCount == flaggedMines){
-        alert("you win!");
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < cols; j++){
+            if(logicBoard[i][j] != 0){
+                const cell = document.querySelector("#id"+ i + "-" +j);
+
+                if(cell.classList.contains("cell-closed")){
+                    return false;
+                }
+            }
+        }
     }
+    alert("you win!");
+    return true;
 }
 
 function cellRightClicked(){
     if(!this.classList.contains("cell-opened")){
         this.classList.toggle("cell-closed");
         this.classList.toggle("cell-flagged");
-
-        const split = this.id.split('-');
-        const celli = Number(split[0].substring(2));
-        const cellj = Number(split[1]);
-
-        if(logicBoard[celli][cellj] === -1){
-            if(this.classList.contains("cell-flagged")){
-                flaggedMines++;
-            }
-            else{
-                flaggedMines--;
-            }
-        }
     }
 }
 
@@ -177,7 +173,6 @@ let rows = 16;
 let cols = 16;
 let mineCount = 40;
 
-let flaggedMines = 0;
 
 const board = document.querySelector(".board");
 createHtmlBoard(rows,cols);
