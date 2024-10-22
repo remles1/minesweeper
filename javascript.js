@@ -1,4 +1,4 @@
-
+// CZASEM SIE ALERT WYGRANEJ NIE POJAWIA W checkWin(). Czy to dlatego ze DOM sie nie uaktualnia zanim sprawdzam?
 
 function createHtmlBoard(rows,cols){
 
