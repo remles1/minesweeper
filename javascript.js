@@ -137,12 +137,7 @@ function cellRightClicked(){
     }
 }
 
-function openFreeCells(celli,cellj){    
-    openFreeCellsHelper(celli,cellj,traversed);
-
-}
-
-function openFreeCellsHelper(celli,cellj){
+function openFreeCells(celli,cellj){
     if(traversed[celli][cellj]){
         return;
     }
@@ -172,7 +167,7 @@ function openFreeCellsHelper(celli,cellj){
                 
                 cell.classList.remove("cell-closed");
                 cell.classList.add("cell-opened");
-                openFreeCellsHelper(currentRow,currentCol);
+                openFreeCells(currentRow,currentCol);
             }
         }
     }
