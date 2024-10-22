@@ -162,6 +162,7 @@ function openFreeCells(celli,cellj){
                 
                 cell.classList.remove("cell-closed");
                 cell.classList.add("cell-opened");
+                cellsOpened++;
                 openFreeCells(currentRow,currentCol);
             }
         }
