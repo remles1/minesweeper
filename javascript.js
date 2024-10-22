@@ -70,8 +70,11 @@ function cellLeftClicked(){
 }
 
 function cellRightClicked(){
-    this.classList.toggle("cell-closed");
-    this.classList.toggle("cell-flagged");
+    if(!this.classList.contains("cell-opened")){
+        this.classList.toggle("cell-closed");
+        this.classList.toggle("cell-flagged");
+    }
+    
 }
 
 
