@@ -96,9 +96,8 @@ function cellLeftClicked(){
         const cellj = Number(split[1]);
         const cellValue = logicBoard[celli][cellj];
         if(cellValue === -1){
-            //tutaj co jak sie kliknie w bombe
-            //to ponizej tymczasowe
-            this.classList.add("cell-mine");
+            this.classList.add("cell-mine-exploded");
+            onLose();
         }
         else{
             this.classList.add("cell-" + cellValue);
@@ -114,7 +113,14 @@ function cellLeftClicked(){
     }
 }
 
-
+function onLose(){
+    //dodac otwieranie planszy
+    cells = Array.from(board.children);
+    cells.forEach(cell => {
+        cell.removeEventListener("click",cellLeftClicked);
+        cell.removeEventListener("contextmenu",cellRightClicked);
+    });
+}
 
 function checkWin(){
     if(cellsOpened === rows*cols - mineCount){

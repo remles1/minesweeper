@@ -76,6 +76,9 @@ body{
     background-image: url("cell-mine.svg");
 }
 
+.cell-mine-exploded{
+    background-image: url("cell-mine-exploded.svg");
+}
 
 .footer{
     color: white;
