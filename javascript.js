@@ -88,6 +88,9 @@ function cellLeftClicked(){
     if(!(this.classList.contains("cell-flagged") || this.classList.contains("cell-opened"))){
         this.classList.remove("cell-closed");
         this.classList.add("cell-opened");
+        cellsOpened++;
+
+
         const split = this.id.split('-');
         const celli = Number(split[0].substring(2));
         const cellj = Number(split[1]);
@@ -106,24 +109,19 @@ function cellLeftClicked(){
         }
         
 
+        //zrobilem zeby checkWin zwracal wartosc, mozna cos potem zrobic z tym
         checkWin();
     }
 }
 
-function checkWin(){
-    for(let i = 0; i < rows; i++){
-        for(let j = 0; j < cols; j++){
-            if(logicBoard[i][j] != 0){
-                const cell = document.querySelector("#id"+ i + "-" +j);
 
-                if(cell.classList.contains("cell-closed")){
-                    return false;
-                }
-            }
-        }
+
+function checkWin(){
+    if(cellsOpened === rows*cols - mineCount){
+        alert("you win!");
+        return true;
     }
-    alert("you win!");
-    return true;
+    return false;
 }
 
 function cellRightClicked(){
@@ -146,6 +144,7 @@ function openFreeCells(celli,cellj){
         cell.classList.remove("cell-closed");
         cell.classList.add("cell-opened");
         cell.classList.add("cell-" + cellValue);
+        cellsOpened++;
     }
     else{
         //rows i cols maja byc zmiennymi globalnymi w tym momencie, niemozliwe inaczej
@@ -172,7 +171,7 @@ function openFreeCells(celli,cellj){
 let rows = 16;
 let cols = 16;
 let mineCount = 40;
-
+let cellsOpened = 0;
 
 const board = document.querySelector(".board");
 createHtmlBoard(rows,cols);
