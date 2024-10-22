@@ -36,6 +36,10 @@ body{
     background-image: url("cell-flagged.svg");
 }
 
+.cell-flagged-wrong{
+    background-image: url("cell-flagged-wrong.svg");
+}
+
 .cell-opened{
     background-image: url("cell-opened.svg");
 }

@@ -112,13 +112,30 @@ function cellLeftClicked(){
     }
 }
 
+function checkWin(){
+    if(cellsOpened === rows*cols - mineCount){
+        alert("you win!");
+        return true;
+    }
+    return false;
+}
+
 function onLose(clickedCell){    
     for(let i = 0; i < rows; i++){
         for(let j = 0; j < cols; j++){
+            const cell = document.querySelector("#id" + i + "-" + j);
             if(logicBoard[i][j] === -1){
-                const cell = document.querySelector("#id" + i + "-" + j);
-                cell.classList.add('cell-mine')
+                if(!(cell.classList.contains("cell-flagged"))){
+                    cell.classList.add("cell-mine")
+                }
+                                
             }
+            else if(cell.classList.contains("cell-flagged")){
+                cell.classList.remove("cell-flagged");
+                cell.classList.add("cell-flagged-wrong")
+            }
+            
+
         }
     }
 
@@ -130,14 +147,6 @@ function onLose(clickedCell){
         cell.removeEventListener("click",cellLeftClicked);
         cell.removeEventListener("contextmenu",cellRightClicked);
     });
-}
-
-function checkWin(){
-    if(cellsOpened === rows*cols - mineCount){
-        alert("you win!");
-        return true;
-    }
-    return false;
 }
 
 function cellRightClicked(){
