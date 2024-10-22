@@ -15,8 +15,8 @@ body{
 
 .board{
     display: flex;
-    max-width: 400;
-    max-height: 400;
+    min-width: 400px;
+    min-height: 400px;
     height: 400px;
     width: 400px;
     flex-wrap: wrap;
