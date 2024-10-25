@@ -142,10 +142,79 @@ function cellMouseUp(event){
             }
         }
         
+        //zrobilem zeby checkWin zwracal wartosc, mozna cos potem zrobic z tym
+        if(cellValue != -1) checkWin();        
+    }
+
+    else if(this.classList.contains("cell-opened")){
+        const split = this.id.split('-');
+        const celli = Number(split[0].substring(2));
+        const cellj = Number(split[1]);
+        const cellValue = logicBoard[celli][cellj];
+        chord(this,celli,cellj);
 
         //zrobilem zeby checkWin zwracal wartosc, mozna cos potem zrobic z tym
         if(cellValue != -1) checkWin();
     }
+
+    
+}
+
+function chord(middleCell, celli, cellj){
+    const cellValue = logicBoard[celli][cellj];
+    let flagSum = 0;
+
+
+    for(let di = -1; di <= 1; di++){
+        let currentRow = celli + di;
+        if(currentRow < 0 || currentRow >= rows) continue;
+
+        for(let dj = -1; dj <= 1; dj++){
+            let currentCol = cellj + dj;
+
+            if(currentCol < 0 || currentCol >= cols) continue;
+            if(di == 0 && dj == 0) continue;
+
+            const cell = document.querySelector("#id" + currentRow + "-" + currentCol);
+            if(cell.classList.contains("cell-flagged")){
+                flagSum++;
+            }
+        }
+    }
+
+    if(flagSum === cellValue){ //tutaj otwieramy faktycznie
+
+        for(let di = -1; di <= 1; di++){
+            let currentRow = celli + di;
+            if(currentRow < 0 || currentRow >= rows) continue;
+    
+            for(let dj = -1; dj <= 1; dj++){
+                let currentCol = cellj + dj;
+    
+                if(currentCol < 0 || currentCol >= cols) continue;
+                if(di == 0 && dj == 0) continue;
+    
+                const cell = document.querySelector("#id" + currentRow + "-" + currentCol);
+                if(logicBoard[currentRow][currentCol] === -1 && !(cell.classList.contains("cell-flagged"))){ //chord otworzyl bombe
+                    onLose(cell);
+                    return;
+                }
+                
+                if(!(cell.classList.contains("cell-flagged")) && cell.classList.contains("cell-closed")){
+                    cell.classList.remove("cell-closed");
+                    cell.classList.add("cell-opened");
+                    cell.classList.add("cell-" + logicBoard[currentRow][currentCol]);
+                    cellsOpened++;
+                }
+
+                if(logicBoard[currentRow][currentCol] === 0){
+                    openFreeCells(currentRow,currentCol);
+                }
+            }
+        }
+
+    }
+
 }
 
 function cellRightClicked(event){
