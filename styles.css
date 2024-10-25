@@ -15,10 +15,10 @@ body{
 
 .board{
     display: flex;
-    min-width: calc(9*25px);
-    min-height: calc(9*25px);
-    height: calc(9*25px);
-    width: calc(9*25px);
+    min-width: calc(16*25px);
+    min-height: calc(16*25px);
+    height: calc(16*25px);
+    width: calc(16*25px);
     flex-wrap: wrap;
     user-select: none; /* Non-standard, works in most browsers */
     -moz-user-select: none; /* Firefox */

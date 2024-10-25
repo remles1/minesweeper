@@ -322,9 +322,9 @@ function openFreeCells(celli,cellj){
     }
 }
 
-let rows = 9;
-let cols = 9;
-let mineCount = 10;
+let rows = 16;
+let cols = 16;
+let mineCount = 40;
 let cellsOpened = 0;
 let leftPressed = false;
 
