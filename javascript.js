@@ -15,7 +15,7 @@ function createHtmlBoard(rows,cols){
             cell.addEventListener("mouseleave",cellMouseLeave);
             cell.addEventListener("contextmenu",cellRightClicked); 
             
-            cell.setAttribute('draggable',false);
+            //cell.setAttribute('draggable',false);
             board.appendChild(cell);
         }
     }
