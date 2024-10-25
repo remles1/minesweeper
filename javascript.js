@@ -108,7 +108,7 @@ function cellLeftClicked(){
         
 
         //zrobilem zeby checkWin zwracal wartosc, mozna cos potem zrobic z tym
-        checkWin();
+        if(cellValue != -1 && cellValue != 0) checkWin();
     }
 }
 
