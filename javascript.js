@@ -91,6 +91,9 @@ function calculateNeighborhood(logicBoard, rows, cols, i, j){
 }
 
 function cellMouseDown(event){
+    if(event.button != 0) {
+        return;
+    }
     leftPressed = true;
     if(event.button === 0 && !this.classList.contains("cell-flagged")){
         this.classList.add("cell-pressed");
@@ -99,18 +102,23 @@ function cellMouseDown(event){
 }
 
 function cellMouseOver(event){
+    event.preventDefault();
     if(leftPressed === true){
         this.classList.add("cell-pressed");
     }
 }
 
 function cellMouseLeave(event){
+    event.preventDefault();
     if(this.classList.contains("cell-pressed")){
         this.classList.remove("cell-pressed");
     }
 }
 
 function cellMouseUp(event){
+    if(event.button != 0) {
+        return;
+    }
     leftPressed = false;
     if(!(this.classList.contains("cell-flagged") || this.classList.contains("cell-opened"))){
         this.classList.remove("cell-pressed")
@@ -137,6 +145,14 @@ function cellMouseUp(event){
 
         //zrobilem zeby checkWin zwracal wartosc, mozna cos potem zrobic z tym
         if(cellValue != -1 && cellValue != 0) checkWin();
+    }
+}
+
+function cellRightClicked(event){
+    event.preventDefault();
+    if(!this.classList.contains("cell-opened")){
+        this.classList.toggle("cell-closed");
+        this.classList.toggle("cell-flagged");
     }
 }
 
@@ -192,12 +208,7 @@ function onLose(clickedCell){
     });
 }
 
-function cellRightClicked(event){
-    if(!this.classList.contains("cell-opened")){
-        this.classList.toggle("cell-closed");
-        this.classList.toggle("cell-flagged");
-    }
-}
+
 
 function openFreeCells(celli,cellj){
     if(traversed[celli][cellj]){
