@@ -185,7 +185,9 @@ function onLose(clickedCell){
     cells.forEach(cell => {
         cell.removeEventListener("mousedown",cellMouseDown);
         cell.removeEventListener("mouseup",cellMouseUp); 
-        cell.removeEventListener("contextmenu",cellRightClicked);
+        cell.removeEventListener("mouseover",cellMouseOver); 
+        cell.removeEventListener("mouseleave",cellMouseLeave);
+        cell.removeEventListener("contextmenu",cellRightClicked); 
         
     });
 }
