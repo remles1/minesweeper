@@ -11,8 +11,11 @@ function createHtmlBoard(rows,cols){
 
             cell.addEventListener("mousedown",cellMouseDown);
             cell.addEventListener("mouseup",cellMouseUp); 
+            cell.addEventListener("mouseover",cellMouseOver); 
+            cell.addEventListener("mouseleave",cellMouseLeave);
             cell.addEventListener("contextmenu",cellRightClicked); 
             
+            cell.setAttribute('draggable',false);
             board.appendChild(cell);
         }
     }
@@ -87,14 +90,28 @@ function calculateNeighborhood(logicBoard, rows, cols, i, j){
     return sum;
 }
 
-function cellMouseDown(){
+function cellMouseDown(event){
+    leftPressed = true;
     if(event.button === 0 && !this.classList.contains("cell-flagged")){
         this.classList.add("cell-pressed");
     }
     
 }
 
-function cellMouseUp(){
+function cellMouseOver(event){
+    if(leftPressed === true){
+        this.classList.add("cell-pressed");
+    }
+}
+
+function cellMouseLeave(event){
+    if(this.classList.contains("cell-pressed")){
+        this.classList.remove("cell-pressed");
+    }
+}
+
+function cellMouseUp(event){
+    leftPressed = false;
     if(!(this.classList.contains("cell-flagged") || this.classList.contains("cell-opened"))){
         this.classList.remove("cell-pressed")
         this.classList.remove("cell-closed");
@@ -173,7 +190,7 @@ function onLose(clickedCell){
     });
 }
 
-function cellRightClicked(){
+function cellRightClicked(event){
     if(!this.classList.contains("cell-opened")){
         this.classList.toggle("cell-closed");
         this.classList.toggle("cell-flagged");
@@ -189,6 +206,9 @@ function openFreeCells(celli,cellj){
     const id = "id" + celli + "-" + cellj;
     const cell = document.querySelector("#" + id);
     const cellValue = logicBoard[celli][cellj]
+    if(cell.classList.contains("cell-flagged")){ //nie otiweramy oflagowanych pol za gracza
+        return;
+    }
     if(!(cellValue === 0)){
         if(!(cell.classList.contains("cell-opened"))){
             cell.classList.remove("cell-closed");
@@ -226,6 +246,7 @@ let rows = 9;
 let cols = 9;
 let mineCount = 10;
 let cellsOpened = 0;
+let leftPressed = false;
 
 const board = document.querySelector(".board");
 createHtmlBoard(rows,cols);
