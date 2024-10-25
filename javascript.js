@@ -114,6 +114,17 @@ function cellLeftClicked(){
 
 function checkWin(){
     if(cellsOpened === rows*cols - mineCount){
+
+        for(let i = 0; i < rows; i++){
+            for(let j = 0; j < cols; j++){
+                if(logicBoard[i][j] === -1){
+                    const cell = document.querySelector("#id" + i + "-" + j);
+                    cell.classList.remove("cell-closed");
+                    cell.classList.add("cell-flagged");
+                }
+            }
+        }
+
         alert("you win!");
         return true;
     }
@@ -198,9 +209,9 @@ function openFreeCells(celli,cellj){
     }
 }
 
-let rows = 16;
-let cols = 16;
-let mineCount = 40;
+let rows = 9;
+let cols = 9;
+let mineCount = 10;
 let cellsOpened = 0;
 
 const board = document.querySelector(".board");
