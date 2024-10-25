@@ -1,5 +1,3 @@
-//TODO zeby nie dodawalo cell-pressed do juz otwartych
-
 function createHtmlBoard(rows,cols){
 
     for(let i = 0; i < rows; i++){
@@ -95,7 +93,7 @@ function cellMouseDown(event){
         return;
     }
     leftPressed = true;
-    if(event.button === 0 && !this.classList.contains("cell-flagged")){
+    if(event.button === 0 && !this.classList.contains("cell-flagged") && !this.classList.contains("cell-opened")){
         this.classList.add("cell-pressed");
     }
     
