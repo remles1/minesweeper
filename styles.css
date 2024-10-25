@@ -28,6 +28,7 @@ body{
     background-size: cover;
 }
 
+
 .cell-closed{
     background-image: url("cell-closed.svg");
 }
@@ -41,6 +42,10 @@ body{
 }
 
 .cell-opened{
+    background-image: url("cell-opened.svg");
+}
+
+.cell-pressed{
     background-image: url("cell-opened.svg");
 }
 

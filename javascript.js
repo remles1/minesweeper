@@ -8,8 +8,11 @@ function createHtmlBoard(rows,cols){
             cell.classList.add("cell");
             cell.classList.add("cell-closed");
             cell.id = "id" + i + "-" + j;
-            cell.addEventListener("click",cellLeftClicked); 
+
+            cell.addEventListener("mousedown",cellMouseDown);
+            cell.addEventListener("mouseup",cellMouseUp); 
             cell.addEventListener("contextmenu",cellRightClicked); 
+            
             board.appendChild(cell);
         }
     }
@@ -84,8 +87,16 @@ function calculateNeighborhood(logicBoard, rows, cols, i, j){
     return sum;
 }
 
-function cellLeftClicked(){
+function cellMouseDown(){
+    if(event.button === 0 && !this.classList.contains("cell-flagged")){
+        this.classList.add("cell-pressed");
+    }
+    
+}
+
+function cellMouseUp(){
     if(!(this.classList.contains("cell-flagged") || this.classList.contains("cell-opened"))){
+        this.classList.remove("cell-pressed")
         this.classList.remove("cell-closed");
         this.classList.add("cell-opened");
         cellsOpened++;
@@ -155,8 +166,10 @@ function onLose(clickedCell){
 
     cells = Array.from(board.children);
     cells.forEach(cell => {
-        cell.removeEventListener("click",cellLeftClicked);
+        cell.removeEventListener("mousedown",cellMouseDown);
+        cell.removeEventListener("mouseup",cellMouseUp); 
         cell.removeEventListener("contextmenu",cellRightClicked);
+        
     });
 }
 
