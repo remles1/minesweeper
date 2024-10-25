@@ -144,7 +144,7 @@ function cellMouseUp(event){
         
 
         //zrobilem zeby checkWin zwracal wartosc, mozna cos potem zrobic z tym
-        if(cellValue != -1 && cellValue != 0) checkWin();
+        if(cellValue != -1) checkWin();
     }
 }
 
