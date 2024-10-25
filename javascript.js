@@ -1,4 +1,4 @@
-// CZASEM SIE ALERT WYGRANEJ NIE POJAWIA W checkWin(). Czy to dlatego ze DOM sie nie uaktualnia zanim sprawdzam?
+//TODO zeby nie dodawalo cell-pressed do juz otwartych
 
 function createHtmlBoard(rows,cols){
 
