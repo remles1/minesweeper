@@ -20,6 +20,9 @@ body{
     height: calc(9*25px);
     width: calc(9*25px);
     flex-wrap: wrap;
+    user-select: none; /* Non-standard, works in most browsers */
+    -moz-user-select: none; /* Firefox */
+    -webkit-user-select: none; /* Safari */
 }
 
 .cell{
