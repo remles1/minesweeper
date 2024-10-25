@@ -103,7 +103,7 @@ function cellMouseDown(event){
 
 function cellMouseOver(event){
     event.preventDefault();
-    if(leftPressed === true){
+    if(leftPressed){
         this.classList.add("cell-pressed");
     }
 }
