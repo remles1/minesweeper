@@ -358,11 +358,8 @@ function countFreeSpaces(celli,cellj,traversed){
 function calc3bv(){
     const traversed = [];
     for(let i = 0; i < rows; i++){
-        const row = [];
+        const row = Array(cols).fill(false);
         traversed.push(row);
-        for(let j = 0; j < cols; j++){
-            traversed[i][j] = false;
-        }
     }
 
     let tbv = 0;
@@ -404,11 +401,8 @@ const logicBoard = createLogicBoard(rows,cols,mineCount);
 
 const traversed = [];
     for(let i = 0; i < rows; i++){
-        const row = [];
+        const row = Array(cols).fill(false);
         traversed.push(row);
-        for(let j = 0; j < cols; j++){
-            traversed[i][j] = false;
-        }
     }
 
 calc3bv();
