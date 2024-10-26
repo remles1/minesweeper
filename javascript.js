@@ -322,6 +322,76 @@ function openFreeCells(celli,cellj){
     }
 }
 
+
+/////////////////////////////////////////////////////
+//3bv calculation and other board analysis
+
+function countFreeSpaces(celli,cellj,traversed){
+    if(traversed[celli][cellj]){
+        return;
+    }
+
+    traversed[celli][cellj] = true;
+    const id = "id" + celli + "-" + cellj;
+    const cell = document.querySelector("#" + id);
+    const cellValue = logicBoard[celli][cellj]
+    
+    if(cellValue === 0){
+        //rows i cols maja byc zmiennymi globalnymi w tym momencie, niemozliwe inaczej
+        
+        for(let di = -1; di <= 1; di++){
+            let currentRow = celli + di;
+            if(currentRow < 0 || currentRow >= rows) continue;
+    
+            for(let dj = -1; dj <= 1; dj++){
+                let currentCol = cellj + dj;
+    
+                if(currentCol < 0 || currentCol >= cols) continue;
+                if(di == 0 && dj == 0) continue;
+                
+                countFreeSpaces(currentRow,currentCol,traversed);
+            }
+        }
+    }
+}
+
+function calc3bv(){
+    const traversed = [];
+    for(let i = 0; i < rows; i++){
+        const row = [];
+        traversed.push(row);
+        for(let j = 0; j < cols; j++){
+            traversed[i][j] = false;
+        }
+    }
+
+    let tbv = 0;
+
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < cols; j++){
+            if(logicBoard[i][j] === 0 && traversed[i][j] === false){
+                countFreeSpaces(i,j,traversed);
+                tbv++;
+            }
+            
+        }
+    }
+
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < cols; j++){
+            if(logicBoard[i][j] > 0 && traversed[i][j] === false){
+                tbv++;
+            }
+        }
+    }
+
+    console.log(tbv);
+}
+
+
+/////////////////////////////////////////////////////
+
+
 let rows = 16;
 let cols = 16;
 let mineCount = 40;
@@ -340,3 +410,5 @@ const traversed = [];
             traversed[i][j] = false;
         }
     }
+
+calc3bv();
